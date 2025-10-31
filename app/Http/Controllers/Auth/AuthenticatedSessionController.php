@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -22,12 +23,19 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $login_request): RedirectResponse
     {
-        $request->authenticate();
+        $login_request->authenticate();
+        // if null, meaning user is authenticated
+        if($login_request->authenticate() === null){
+            //then check if user is already approved
+            if(Auth::user()->acc_registration_status == "pending"){
+                $login_request->session()->invalidate();
+                return redirect()->intended('/login');
+            }
+        } 
 
-        $request->session()->regenerate();
-
+        $login_request->session()->regenerate();
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
