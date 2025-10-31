@@ -2,6 +2,12 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    @if (session('account_status'))
+        <div class="mb-4 text-sm text-red-600 dark:text-red-400" id="account_status">
+            {{ session('account_status') }}
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
         <!-- Email Address -->
@@ -16,7 +22,7 @@
                 required
                 autofocus
                 autocomplete="username"
-                style="background-color: whitesmoke;"
+                style="background-color: whitesmoke; color: black;"
             />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
@@ -31,7 +37,7 @@
                 class="block w-full mt-1"
                 required
                 autocomplete="current-password"
-                style="background-color: whitesmoke;"
+                style="background-color: whitesmoke; color: black;"
             />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>

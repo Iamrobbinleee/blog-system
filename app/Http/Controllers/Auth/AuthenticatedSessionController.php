@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
             //then check if user is already approved
             if(Auth::user()->acc_registration_status == "pending"){
                 $login_request->session()->invalidate();
-                return redirect()->intended('/login');
+                return redirect()->intended('/login')->with('account_status', 'Your Account is under review for approval. Please try again later.');
             }
         } 
 
