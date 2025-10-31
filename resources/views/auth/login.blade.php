@@ -2,11 +2,15 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    @if (session('account_status'))
+    {{-- Traditional Session message --}}
+    {{-- @if (session('account_status'))
         <div class="mb-4 text-sm text-red-600 dark:text-red-400" id="account_status">
             {{ session('account_status') }}
         </div>
-    @endif
+    @endif --}}
+
+    <x-auth-session-status class="mb-4 text-sm text-red-600 dark:text-red-400" :status="session('account_status')" />
+
 
     <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
