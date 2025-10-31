@@ -59,7 +59,7 @@ class User extends Authenticatable
     protected $superadmins = ['superadmin1'];
 
     public function isSuperAdmin(){
-        return $this->role == 1;
+        return $this->role_id == 1;
     }
 
     public function validSuperAdmin(){

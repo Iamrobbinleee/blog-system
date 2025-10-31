@@ -33,10 +33,22 @@ class AuthenticatedSessionController extends Controller
                 $login_request->session()->invalidate();
                 return redirect()->intended('/login')->with('account_status', 'Your Account is under review for approval. Please try again later.');
             }
-        } 
+        }
 
-        $login_request->session()->regenerate();
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+        if($user->isSuperAdmin() && !$user->validSuperAdmin()){
+
+            return redirect()->intended('/login')->with('account_status', 'Your Account does not exist.');
+
+        } else if($user->isSuperAdmin() && $user->validSuperAdmin()){
+
+            $login_request->session()->regenerate();
+            return redirect()->intended(route('dashboard', absolute: false));
+
+        } else {
+            $login_request->session()->regenerate();
+            return redirect()->intended(route('test-user-page', absolute: false));
+        }
     }
 
     /**
