@@ -37,7 +37,7 @@
                             <div class="p-6 text-gray-900 dark:text-gray-100">
                                 <div class="card dark:bg-gray-900" style="border: transparent;">
                                     <div class="card-body dark:bg-gray-900">
-                                        <textarea name="" id="" cols="30" rows="10" style="width: 100%; background-color: transparent; border: white solid 1px; border-radius: 5px; max-height: 250px;"></textarea>
+                                        <textarea name="" id="" cols="30" rows="10" style="width: 100%; background-color: transparent; border: transparent; border-radius: 5px; max-height: 250px;"></textarea>
                                     </div>
                                     <div class="card-footer dark:bg-gray-900" style="border: transparent;">
                                         <div class="" style="text-align: right;">
