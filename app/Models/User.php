@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Blog;
 
 class User extends Authenticatable
 {
@@ -65,5 +66,10 @@ class User extends Authenticatable
     public function validSuperAdmin(){
         // return in_array($this->username, $this->superadmins);
         return in_array(strtolower($this->username), array_map("strtolower", $this->superadmins));
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
     }
 }
